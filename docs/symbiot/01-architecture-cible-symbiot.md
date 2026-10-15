@@ -116,5 +116,11 @@ Notation 0–4 par axe et par client : 0 absent, 1 ébauche, 2 partiel, 3 solide
 | `tauziet40/centaur` | `/home/user/tauziet40/centaur` | Interfaces client de la messagerie inter-espaces (I4) |
 | `tauziet40/cognee` | `/home/user/tauziet40/cognee` | Interfaces client de la mémoire et du RAG (I2, I5) |
 | `tauziet40/elephant-broker` | `/home/user/tauziet40/elephant-broker` | Forme d'un contrat client ↔ runtime de mémoire (I5) |
+| `tauziet40/beeai-framework` | `/home/user/tauziet40/beeai-framework` | Framework d'agents pressenti, avec A2A (C3, C9) ; fiche L2b |
+| `tauziet40/agentstack` | `/home/user/tauziet40/agentstack` | Plateforme serveur de BeeAI : agents en A2A, Keycloak, Helm ; fiche L2c |
+| `tauziet40/memorybear` | `/home/user/tauziet40/memorybear` | Envisagé pour la gestion des espaces ; impose Neo4j, Redis et Elasticsearch, hors contrainte de stack ; non évalué à ce stade |
+| `tauziet40/openrig` | `/home/user/tauziet40/openrig` | Coordination d'une équipe d'agents de pilotage de l'intégration ; livrable L5 |
 
-Les quatre derniers ne sont lus que sur leurs surfaces d'interface.
+Centaur, Cognee et ElephantBroker ne sont lus que sur leurs surfaces d'interface. DSH est vérifié sur cinq seams (annexe B).
+
+**Couche agents pressentie (rappel du 2026-10-15) :** BeeAI Framework avec A2A pour écrire et décrire les agents, DeepSeek Harness comme harness d'exécution, Cognee et ElephantBroker pour la mémoire et le RAG, OKF pour la donnée structurée. La relation entre cette couche et le client retenu est l'objet du §8 du comparatif.
