@@ -1,7 +1,7 @@
 # Comparatif Rowboat vs Eigent et recommandation pour le client Symbiot
 
-**Statut :** version de travail du 2026-10-15, soumise à validation ; §8 ajouté le même jour (plan v3.3)
-**Sources :** [02-fiche-rowboat.md](02-fiche-rowboat.md), [03-fiche-eigent.md](03-fiche-eigent.md), [02b-fiche-beeai-framework.md](02b-fiche-beeai-framework.md), [02c-fiche-agentstack.md](02c-fiche-agentstack.md), [annexe A](annexe-A-interfaces-serveur.md), [annexe B](annexe-B-dsh-seams.md) ; référentiel [01-architecture-cible-symbiot.md](01-architecture-cible-symbiot.md)
+**Statut :** version de travail du 2026-10-15, soumise à validation ; §8 ajouté le même jour (plan v3.3), complété en v3.4 (MemoryBear, Synapse AI)
+**Sources :** [02-fiche-rowboat.md](02-fiche-rowboat.md), [03-fiche-eigent.md](03-fiche-eigent.md), [02b-fiche-beeai-framework.md](02b-fiche-beeai-framework.md), [02c-fiche-agentstack.md](02c-fiche-agentstack.md), [02d-fiche-memorybear.md](02d-fiche-memorybear.md), [02e-note-synapse-ai-workflows-apps.md](02e-note-synapse-ai-workflows-apps.md), [annexe A](annexe-A-interfaces-serveur.md), [annexe B](annexe-B-dsh-seams.md) ; référentiel [01-architecture-cible-symbiot.md](01-architecture-cible-symbiot.md)
 
 ---
 
@@ -173,6 +173,8 @@ Lecture : aucun candidat ne couvre les cinq principes. Les deux qui en couvrent 
 | Écriture des agents | **BeeAI Framework, Python** | la couverture de protocoles la plus large (A2A, MCP, ACP, OpenAI), `RequirementAgent` comme base de politique, DeepSeek et Ollama natifs, LF et Apache 2.0 | loader OKF ; `BaseMemory` Cognee ; auth sur le serve A2A ; mapping `io_confirm` → `input_required` |
 | Harness d'exécution | **DSH**, épinglé | journal rejouable, bundles Cordis, sandbox et SSH, ACP ; même langage que Rowboat ; profil ACP que le code mode de Rowboat sait déjà piloter | plugin de politique ; `CredentialProvider` OpenBao ; fournisseur sandbox Centaur ; presets de rôles ; plugin de connexion à Harbor (clé `rbk_`, invocations) |
 | Registre et runtime des agents de service, A2A | **Agent Stack** | A2A natif avec Agent Card, Keycloak intégré, PostgreSQL et SeaweedFS natifs, proxy LLM comme point d'insertion du routeur, connecteurs MCP OAuth par utilisateur | corriger l'identité par email, chiffrer `connectors.auth`, adaptateur OpenBao, migrer Redis (2 à 4 jours) ; wrapper Python pour DSH et Hermes ou enregistrement unmanaged |
+| Console d'administration des spaces (C15) | **à construire**, UX reprise de MemoryBear, back-office neuf | MemoryBear a le modèle tenant → espace → membre et l'UX, mais ni liste blanche de capacités par espace, ni API de politique, ni OIDC, ni audit, et son plan d'administration est imbriqué dans le moteur mémoire ([fiche](02d-fiche-memorybear.md) §3 A3, §4) ; l'UX a déjà été reprise, pas le back-office | back-office sur PostgreSQL et Keycloak : espaces alignés sur les orgs et spaces de Harbor, table espace ↔ capacité (modèles, skills, plugins, MCP, contextes OKF et datasets Cognee), API de politique consultée par Harbor (`policy.ts`), DSH (plugin `tools/pre-execute`), Agent Stack (permissions) et Cognee (datasets), audit |
+| Workflows et apps no-code (C16) | **Rowboat** pour les mini-apps ; moteur de workflow à écrire en clean-room, Synapse non modifié en service séparé à court terme | Synapse est natif, AGPL sans CLA, sans builder d'app ([note](02e-note-synapse-ai-workflows-apps.md)) ; Rowboat tient déjà la mini-app (HTML autonome, agent backend, contrats de données) et les déclencheurs de fond | sous-ensemble de steps en TypeScript dans le moteur de tâches de fond de Rowboat (agent, llm, evaluator, if et switch avec évaluateur sûr, parallel, loop, human, end), `@xyflow/react` MIT si canvas |
 | Messagerie inter-espaces et exécution en sandbox | **Centaur** | sandbox par session, workflows durables, iron-proxy ; mais pas d'OIDC et recouvrement avec Agent Stack | **décision** : le garder pour les sandboxes et les workflows, ou confier ces rôles à Agent Stack (sans sandbox) et à DSH (sandbox locale) ; dans les deux cas, I4 est un connecteur Harbor |
 
 **Point de décision serveur.** Agent Stack et Centaur hébergent tous deux des agents partagés sur PostgreSQL et Kubernetes. Les garder tous deux double l'hébergement d'agents. Trois options :
@@ -187,7 +189,7 @@ Recommandation : **S2**, sauf si l'exécution en sandbox serveur de harness en l
 - **Cognee** reste le fournisseur unique de mémoire et de RAG, atteint partout par MCP : overlay `mcp-client` dans DSH, `MCPTool.from_client` dans BeeAI, connecteur OAuth dans Agent Stack, `mcp.json` puis outils natifs dans Rowboat. Aucune brique n'a de seam mémoire typé ; c'est acceptable tant que Cognee est le seul fournisseur. Son MCP doit être placé derrière un reverse proxy qui vérifie le JWT Keycloak (annexe A §3).
 - **OKF** : le second cerveau Rowboat en est la source côté poste (chantier 3 du §5) ; côté agents, un loader OKF BeeAI d'environ 50 lignes et un prompt qui cite `source` ; côté Cognee, `remember` ingère les bundles et `ontology_key` porte l'ontologie maintenue.
 - **ElephantBroker** reste une illustration : il impose Neo4j, Qdrant, Redis et ClickHouse, et son authentification est un stub.
-- **MemoryBear**, envisagé pour la gestion des espaces, impose Neo4j, Redis et Elasticsearch et n'a pas de notion d'espace partagé multi-utilisateurs visible en surface ; Harbor couvre ce rôle sans écart de stack. Il n'est pas retenu.
+- **MemoryBear en post-traitement de Cognee** ([fiche](02d-fiche-memorybear.md) §4) : sa science est réelle (extraction bitemporelle, réflexion Layer2, insights, oubli audité, ontologie OWL compatible), mais il n'est pas branchable derrière Cognee : il n'ingère que des conversations, n'exporte rien en masse, impose Neo4j avec APOC et GDS, Elasticsearch et Redis, et traite le français comme du chinois. Il est une **carrière de logique de consolidation** à transplanter dans un post-traitement écrit autour de Cognee et FalkorDB, où ontologie, données et graphe restent uniques. Transplanter coûte moins que porter.
 
 ### 8.5 Chantiers supplémentaires (complètent le §5)
 
@@ -201,7 +203,24 @@ Recommandation : **S2**, sauf si l'exécution en sandbox serveur de harness en l
 | 17 | Connecteur Harbor vers Agent Stack (`connectors/agentstack/`, proxy A2A, approbations par `input_required`) ; remplace ou complète le connecteur Centaur du chantier 5 selon S1 / S2 | I3, I4 | moyen | 12 |
 | 18 | Routeur LLM côté serveur dans le proxy OpenAI d'Agent Stack, cohérent avec le routeur client du chantier 7 | C11 | moyen | 12 |
 
-Ordre suggéré après le premier incrément du §5 : 12 et 14 (socle serveur et secrets), puis 13 et 15 (gouvernance et harness), puis 16, 17 et 18.
+| 19 | Console d'administration des spaces (C15) : back-office neuf sur PostgreSQL et Keycloak derrière l'UX reprise de MemoryBear ; modèle de données inspiré de MemoryBear (tenant, espace, membre, invitations, clés à scopes et quotas, emplacements de modèles) ; table espace ↔ capacité ; **API de politique** « U peut-il utiliser M / T / K dans S ? » consommée par Harbor, DSH, Agent Stack et Cognee ; audit des actions d'administration | C15 | élevé | 1, 12 |
+| 20 | Post-traitement de Cognee : service de consolidation sur FalkorDB transplantant la logique MemoryBear (ancrage bitemporel, Layer2, insights, oubli audité), alimenté par `recall` ou par export de graphe, écrivant par `remember` et en bundles OKF ; détection de langue française | C7, C6 | élevé | 2, 3 |
+| 21 | Workflows no-code (C16) : court terme, Synapse non modifié en service AGPL séparé appelé par l'agent backend d'une mini-app, v1 mono-processus ; à terme, sous-ensemble de steps en clean-room TypeScript dans le moteur de tâches de fond de Rowboat | C16 | moyen puis élevé | 2 |
+
+Ordre suggéré après le premier incrément du §5 : 12 et 14 (socle serveur et secrets), puis 13 et 15 (gouvernance et harness), puis 19 (console et API de politique, qui conditionne la gouvernance partagée), puis 16, 17, 18, 20 et 21.
+
+### 8.7 Relations repensées : ce qui gouverne quoi
+
+- **Harbor** reste la source de vérité des orgs, des spaces et des membres (I3). La console C15 n'invente pas ses espaces : elle administre les capacités des spaces Harbor et pousse les décisions aux autres briques par l'API de politique. C'est ce qui rend « UX MemoryBear, back-office neuf » cohérent : le back-office est un plan de contrôle au-dessus de Harbor, pas une seconde base d'espaces.
+- **Cognee** reste l'unique point d'unification du RAG et de la mémoire ; la console lui assigne datasets et ontologie par space ; le post-traitement (chantier 20) tourne derrière lui sur FalkorDB.
+- **DSH** exécute, sous la politique de la console (plugin `tools/pre-execute` interrogeant l'API de politique) et avec les ressources que la console autorise (overlays `mcp-client` par space).
+- **Agent Stack** héberge et expose en A2A ; ses permissions et ses connecteurs par utilisateur reçoivent les décisions de la console.
+- **Rowboat** tient le poste : second cerveau, mini-apps et tâches de fond (C16 côté poste), projection vers les spaces.
+
+### 8.8 Décisions attendues (suite)
+
+7. Confirmer le rôle de MemoryBear : UX de la console et carrière de logique de consolidation, sans adoption du back-office ni du moteur. Sinon, dire quel autre rôle il tient.
+8. Trancher C16 : Synapse en service AGPL séparé à court terme, puis clean-room TypeScript ; ou clean-room directement.
 
 ### 8.6 Décisions attendues (en plus du §7)
 
