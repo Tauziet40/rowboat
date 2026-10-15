@@ -1,7 +1,7 @@
 # Comparatif Rowboat vs Eigent et recommandation pour le client Symbiot
 
-**Statut :** version de travail du 2026-10-15, soumise à validation
-**Sources :** [02-fiche-rowboat.md](02-fiche-rowboat.md), [03-fiche-eigent.md](03-fiche-eigent.md), [annexe A](annexe-A-interfaces-serveur.md) ; référentiel [01-architecture-cible-symbiot.md](01-architecture-cible-symbiot.md)
+**Statut :** version de travail du 2026-10-15, soumise à validation ; §8 ajouté le même jour (plan v3.3)
+**Sources :** [02-fiche-rowboat.md](02-fiche-rowboat.md), [03-fiche-eigent.md](03-fiche-eigent.md), [02b-fiche-beeai-framework.md](02b-fiche-beeai-framework.md), [02c-fiche-agentstack.md](02c-fiche-agentstack.md), [annexe A](annexe-A-interfaces-serveur.md), [annexe B](annexe-B-dsh-seams.md) ; référentiel [01-architecture-cible-symbiot.md](01-architecture-cible-symbiot.md)
 
 ---
 
@@ -138,3 +138,73 @@ Décisions attendues à la validation de ce document :
 1. Confirmer le scénario (c) et l'ordre des chantiers du §5.
 2. Trancher l'annuaire d'identités (§6) avant le chantier 2.
 3. Lancer le plan court du livrable L5 (contextes OKF pour l'équipe OpenRig) sur la base des chantiers 2 et 3.
+
+
+## 8. Couche agents : BeeAI, DSH, Agent Stack, Centaur, et la place d'Eigent
+
+Ce paragraphe répond à trois questions posées après la recommandation du §7 : Eigent peut-il se substituer à Rowboat ; DSH peut-il reprendre les principes d'Eigent ; comment s'articulent BeeAI Framework et Agent Stack, pressentis pour la couche agents. Les §1 à §7 restent valides : Rowboat est le client.
+
+### 8.1 Eigent face à Rowboat
+
+Eigent ne peut se substituer à Rowboat ni en totalité ni en partie sur le poste. En totalité, il faudrait reconstruire l'environnement partagé, l'identité OIDC, le connecteur Hermes et le téléversement de contenu (fiche Eigent, A3, A9, A8). En partie, la cohabitation de deux runtimes d'agents, deux mémoires locales, deux `mcp.json` et deux systèmes de permissions sur le même poste est le contraire de la lisibilité des connexions, et aucun des deux ne sait déléguer à l'autre. Eigent n'entre dans Symbiot que comme **agent membre d'un Space**, par un pont parlant le contrat d'agent de Harbor, et seulement si sa Workforce apporte quelque chose que la couche agents ci-dessous ne couvre pas. Les cinq principes d'Eigent sont désormais mesurés sur DSH et BeeAI ; ils ne justifient plus de garder Eigent.
+
+### 8.2 Les cinq principes d'Eigent, portés par qui
+
+| Principe | Eigent | DSH ([annexe B](annexe-B-dsh-seams.md)) | BeeAI ([fiche](02b-fiche-beeai-framework.md) §4) | Agent Stack ([fiche](02c-fiche-agentstack.md)) | Centaur ([annexe A](annexe-A-interfaces-serveur.md) §2) |
+|---|---|---|---|---|---|
+| (1) Journal durable rejouable | couvert (SQLite) | **couvert** (JSONL + zstd, fork, resume, approbations journalisées, format versionné) | partiel (événements, trajectoire ; ni persistance ni rejeu) | partiel (contexts et `context_history` en PostgreSQL) | couvert (sessions et événements SSE rejouables en PostgreSQL) |
+| (2) Politique allow / prompt / deny, HITL typé, tags de risque | couvert | partiel (ask / deny / allow, question et choix ; pas de moteur de règles, de diff review ni de tags) | partiel (`AskPermission` binaire, règles conditionnelles) | partiel (extensions `approval` et `tool call`) | partiel (approbations via harness) |
+| (3) Environnements d'exécution | partiel (`RemoteHands` placeholder) | partiel (local, sandbox OS, SSH ; pas de conteneur) | partiel (shell et fichiers locaux ou ACP ; interpréteur HTTP) | partiel (un pod par agent, pas de sandbox) | **couvert** (sandbox Kubernetes par session, iron-proxy) |
+| (4) Bundles déclaratifs, secrets hors environnement | couvert | partiel (profils et bundles patchables ; secrets sans courtier) | absent | partiel (registre d'images, Fernet, Secrets k8s ; adaptateur OpenBao faisable) | partiel (tools et workflows en plugins ; secrets par iron-proxy depuis 1Password) |
+| (5) Workforce coordinateur, planificateur, workers | couvert | partiel (subagents, Agent Teams expérimental, pas de planificateur) | partiel (coordinateur + handoffs, workflows séquentiels) | absent (délégué au framework) | partiel (`run_agents`, agents enfants) |
+| Mémoire remplaçable → Cognee | soudée | overlay `mcp-client`, sans seam typé | `BaseMemory` sync, précédent Dakera en TS | connecteur MCP OAuth par utilisateur | MCP via catalogue d'outils |
+| Description A2A | absent | absent | serve A2A (sans auth) | **natif**, agents unmanaged | absent |
+| Exposition MCP | absent | absent | serve MCP | absent | `/mcp` console |
+| Stabilité | préversions CAMEL | developer preview, ruptures annoncées, pas d'audit | 0.x mensuel, LF | 0.7 pré-1.0, LF | dépôt actif, Rust |
+
+Lecture : aucun candidat ne couvre les cinq principes. Les deux qui en couvrent le plus sont DSH (journal, composition, exécution) et Centaur (sandbox, journal). Ce que personne ne fournit et qu'il faut écrire une fois : **le moteur de politique** avec interactions typées et étiquettes de risque, et **le courtier de secrets OpenBao**.
+
+### 8.3 Articulation recommandée
+
+| Rôle | Brique | Pourquoi | Ce qu'il faut ajouter |
+|---|---|---|---|
+| Client et second cerveau | **Rowboat** | §7 | chantiers 0 à 4 du §5 |
+| Espaces d'organisation | **Harbor** | acquis, Keycloak et SeaweedFS par configuration | connecteurs (ci-dessous) |
+| Écriture des agents | **BeeAI Framework, Python** | la couverture de protocoles la plus large (A2A, MCP, ACP, OpenAI), `RequirementAgent` comme base de politique, DeepSeek et Ollama natifs, LF et Apache 2.0 | loader OKF ; `BaseMemory` Cognee ; auth sur le serve A2A ; mapping `io_confirm` → `input_required` |
+| Harness d'exécution | **DSH**, épinglé | journal rejouable, bundles Cordis, sandbox et SSH, ACP ; même langage que Rowboat ; profil ACP que le code mode de Rowboat sait déjà piloter | plugin de politique ; `CredentialProvider` OpenBao ; fournisseur sandbox Centaur ; presets de rôles ; plugin de connexion à Harbor (clé `rbk_`, invocations) |
+| Registre et runtime des agents de service, A2A | **Agent Stack** | A2A natif avec Agent Card, Keycloak intégré, PostgreSQL et SeaweedFS natifs, proxy LLM comme point d'insertion du routeur, connecteurs MCP OAuth par utilisateur | corriger l'identité par email, chiffrer `connectors.auth`, adaptateur OpenBao, migrer Redis (2 à 4 jours) ; wrapper Python pour DSH et Hermes ou enregistrement unmanaged |
+| Messagerie inter-espaces et exécution en sandbox | **Centaur** | sandbox par session, workflows durables, iron-proxy ; mais pas d'OIDC et recouvrement avec Agent Stack | **décision** : le garder pour les sandboxes et les workflows, ou confier ces rôles à Agent Stack (sans sandbox) et à DSH (sandbox locale) ; dans les deux cas, I4 est un connecteur Harbor |
+
+**Point de décision serveur.** Agent Stack et Centaur hébergent tous deux des agents partagés sur PostgreSQL et Kubernetes. Les garder tous deux double l'hébergement d'agents. Trois options :
+- **S1, les deux** : Agent Stack comme registre A2A et passerelle LLM, Centaur pour les sandboxes et les workflows durables ; un connecteur Harbor vers chacun. Le plus complet, le plus lourd.
+- **S2, Agent Stack seul** : les agents de service y tournent en pods ; DSH fournit la sandbox locale pour les agents de code ; les workflows durables sont à réécrire ou abandonnés. Le plus cohérent avec Keycloak et A2A.
+- **S3, Centaur seul** : A2A par le serve BeeAI, Keycloak à ajouter sur l'API Centaur. Le plus de travail d'identité.
+
+Recommandation : **S2**, sauf si l'exécution en sandbox serveur de harness en ligne de commande (Claude Code, Codex, Hermes) et les workflows durables sont des besoins confirmés, auquel cas S1.
+
+### 8.4 Mémoire et connaissances dans cette articulation
+
+- **Cognee** reste le fournisseur unique de mémoire et de RAG, atteint partout par MCP : overlay `mcp-client` dans DSH, `MCPTool.from_client` dans BeeAI, connecteur OAuth dans Agent Stack, `mcp.json` puis outils natifs dans Rowboat. Aucune brique n'a de seam mémoire typé ; c'est acceptable tant que Cognee est le seul fournisseur. Son MCP doit être placé derrière un reverse proxy qui vérifie le JWT Keycloak (annexe A §3).
+- **OKF** : le second cerveau Rowboat en est la source côté poste (chantier 3 du §5) ; côté agents, un loader OKF BeeAI d'environ 50 lignes et un prompt qui cite `source` ; côté Cognee, `remember` ingère les bundles et `ontology_key` porte l'ontologie maintenue.
+- **ElephantBroker** reste une illustration : il impose Neo4j, Qdrant, Redis et ClickHouse, et son authentification est un stub.
+- **MemoryBear**, envisagé pour la gestion des espaces, impose Neo4j, Redis et Elasticsearch et n'a pas de notion d'espace partagé multi-utilisateurs visible en surface ; Harbor couvre ce rôle sans écart de stack. Il n'est pas retenu.
+
+### 8.5 Chantiers supplémentaires (complètent le §5)
+
+| # | Chantier | Composant | Effort | Dépend de |
+|---|---|---|---|---|
+| 12 | Déployer Agent Stack sur la stack existante : Keycloak existant via `externalOidcProvider`, SeaweedFS existant, migration du cache et du rate-limit hors Redis, chiffrement de `connectors.auth`, identité par `sub` | C9, C13, C8 | moyen | 1 |
+| 13 | Moteur de politique partagé : règles allow / prompt / deny par outil et arguments, étiquettes de risque déterministes, interactions typées (question, choix, approbation, diff review) ; implémenté une fois comme plugin DSH (`tools/pre-execute`, `ctx.tools.guard`) et comme middleware BeeAI (`start` d'outil) | C3 | moyen à élevé | — |
+| 14 | Courtier de secrets OpenBao : `CredentialProvider` DSH, `IEnvVariableRepository` Agent Stack, injection au constructeur pour BeeAI, adaptateur Rowboat (chantier 4) | C14 | moyen | — |
+| 15 | DSH comme moteur de code mode de Rowboat par ACP (profil `acp`), et comme fournisseur `subagent-acp` pour les agents BeeAI | C3 | faible | — |
+| 16 | Exposition A2A de DSH et Hermes : wrapper Python BeeAI ou Agent Stack enregistré unmanaged ; Agent Cards générées depuis les bundles | C9 | moyen | 12 |
+| 17 | Connecteur Harbor vers Agent Stack (`connectors/agentstack/`, proxy A2A, approbations par `input_required`) ; remplace ou complète le connecteur Centaur du chantier 5 selon S1 / S2 | I3, I4 | moyen | 12 |
+| 18 | Routeur LLM côté serveur dans le proxy OpenAI d'Agent Stack, cohérent avec le routeur client du chantier 7 | C11 | moyen | 12 |
+
+Ordre suggéré après le premier incrément du §5 : 12 et 14 (socle serveur et secrets), puis 13 et 15 (gouvernance et harness), puis 16, 17 et 18.
+
+### 8.6 Décisions attendues (en plus du §7)
+
+4. Confirmer l'articulation du §8.3 : BeeAI pour écrire les agents, DSH épinglé comme harness, Agent Stack comme registre A2A.
+5. Trancher S1 / S2 / S3 pour Centaur.
+6. Confirmer l'abandon d'Eigent et de MemoryBear comme briques, et leur maintien comme références.
