@@ -124,6 +124,7 @@ docker-compose (API, ~9 workers Celery, sandbox) et `e2b-infra` ; pas de Helm al
 - **Non utilisable tel quel** comme console gouvernant Harbor, DSH et Cognee : c'est la console *de* MemoryBear, sans liste blanche de capacités par espace, sans API de politique, sans OIDC, sans audit des actions d'administration, et imbriquée dans le moteur mémoire (créer un espace crée aussi des scènes d'ontologie et une configuration mémoire, `workspace_service.py:939-1118`).
 - **Ce qu'il faudrait** : une table espace ↔ capacité, une API de politique et des jetons à scopes, Keycloak en fournisseur d'identité via `auth-sdk`, OpenBao, un vrai RBAC, l'extraction du plan d'administration en service PostgreSQL seul (~15 tables, ~10 contrôleurs, suppression du démarrage Neo4j / ES / Celery, remplacement de Redis pour les sessions). De l'ordre de plusieurs mois-personne.
 - **Verdict** : y puiser **le modèle de données et l'UX** (tenant, espace, membre, invitations, clés API à scopes et quotas, six emplacements de modèles par espace, marchés MCP) pour concevoir la console Symbiot, plutôt que l'adopter.
+- **État de fait (précisé le 2026-10-15)** : l'UX de MemoryBear a déjà été reprise, pas le back-office. C'est cohérent avec ce verdict : la console Symbiot garde l'UX et reçoit un back-office neuf sur PostgreSQL et Keycloak, avec la liste blanche par espace et l'API de politique que MemoryBear n'a pas. La position de MemoryBear reste incertaine ; elle est à trancher au §8 du comparatif.
 
 ## 5. Forces, faiblesses, risques
 
