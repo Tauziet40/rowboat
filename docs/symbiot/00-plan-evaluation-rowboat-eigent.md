@@ -1,7 +1,7 @@
 # Plan d'évaluation — Rowboat vs Eigent comme socle client Symbiot
 
 **Statut :** plan v2 soumis à validation (aucun contenu rédigé avant accord)
-**Date :** 2026-10-15 (v2 : contraintes de stack, auth/secrets, ressources tierces ; v2.1 : DeepSeek Harness cloné comme référence du modèle de plugins ; v2.2 : OKF 0.2 ancré sur la spec Google ; v2.3 : le fork vise l'application, pas PostgreSQL ; v2.4 : rôles de PostgreSQL, OKF et Cognee précisés ; v3 : recentrage sur l'intégration des deux clients, stack serveur hors périmètre ; v3.1 : dépôts serveur lus sur leurs interfaces seulement)
+**Date :** 2026-10-15 (v2 : contraintes de stack, auth/secrets, ressources tierces ; v2.1 : DeepSeek Harness cloné comme référence du modèle de plugins ; v2.2 : OKF 0.2 ancré sur la spec Google ; v2.3 : le fork vise l'application, pas PostgreSQL ; v2.4 : rôles de PostgreSQL, OKF et Cognee précisés ; v3 : recentrage sur l'intégration des deux clients, stack serveur hors périmètre ; v3.1 : dépôts serveur lus sur leurs interfaces seulement ; v3.2 : livrable L5 OpenRig ajouté en suite)
 **Auteur :** Claude (session de travail pour vs@method.watch)
 **Format de travail :** Markdown ; conversion en formats finaux après validation du contenu
 
@@ -92,7 +92,8 @@ Chaque axe est noté pour chaque dépôt sur une échelle 0–4 (0 absent, 1 éb
 | L2 | `02-fiche-rowboat.md` | analyse de Rowboat : architecture, modules clés avec références de fichiers, notation A1–A13, forces, faiblesses, risques |
 | L3 | `03-fiche-eigent.md` | même structure pour Eigent |
 | L4 | `04-comparatif-et-recommandation.md` | grille notée côte à côte (A0 pondéré ×2), cartographie C1–C14 → couverture par chaque dépôt, inventaire des bases et stores imposés par chaque dépôt et plan de migration de chaque store non conforme vers PostgreSQL ou FalkorDB par fork de l'application, avec la difficulté estimée, scénarios (a)/(b)/(c), recommandation, écarts priorisés et ordre de chantiers |
-| L5 | `INDEX.md` | index des documents finaux (créé à la conversion) |
+| L5 | `05-contextes-okf-pour-equipe-openrig.md` | **Suite de l'évaluation, produite après le choix du client (L4 validé).** Comment déployer des contextes de connaissance produit, technique et projet pour une équipe d'agents coordonnée par OpenRig (`tauziet40/openrig`, cloné en lecture seule dans `/home/user/tauziet40/openrig` : rig défini en YAML, sièges Claude Code et Codex, agent lead, démon tmux, SQLite local) chargée de piloter l'intégration retenue ; et comment produire ces contextes en bundles OKF 0.2 (un concept par fichier, `sources`, `generated` / `verified`, `status`, `stale_after`) pour que l'équipe d'agents travaille sur une connaissance validée, datée et traçable plutôt que sur des hypothèses. Ce livrable aura son propre plan court soumis à validation avant rédaction. |
+| L6 | `INDEX.md` | index des documents finaux (créé à la conversion) |
 
 Note de modifications : non applicable (première version).
 
