@@ -61,6 +61,8 @@ Quatre intégrations sont mesurées pour chaque client, plus l'accès aux ressou
 | C10 | Plugins façon Cordis (DeepSeek Harness) | Extensibilité par plugins : seams remplaçables, profils et bundles patchables, pas de cœur privilégié |
 | C11 | Routeur LLM | Arbitrage opportuniste local on-premise vs API cloud |
 | C12 | Services in-house | Nextcloud, email, suite bureautique |
+| C15 | Console d'administration des spaces | Gestion des tenants : modèles, skills, plugins, contextes et droits autorisés par space, appliqués à Harbor, DSH et Cognee (candidat : MemoryBear) |
+| C16 | Workflows et apps no-code | Construction d'applications et de pipelines sans code par l'utilisateur, sur le poste (mini-apps Rowboat) ou sur le serveur (candidat : extraction de Synapse AI) |
 | C13 | Keycloak | Identité et authentification (OIDC) pour humains et agents |
 | C14 | OpenBao | Secrets : clés de modèles, clés d'agents, jetons d'intégration |
 
@@ -118,7 +120,8 @@ Notation 0–4 par axe et par client : 0 absent, 1 ébauche, 2 partiel, 3 solide
 | `tauziet40/elephant-broker` | `/home/user/tauziet40/elephant-broker` | Forme d'un contrat client ↔ runtime de mémoire (I5) |
 | `tauziet40/beeai-framework` | `/home/user/tauziet40/beeai-framework` | Framework d'agents pressenti, avec A2A (C3, C9) ; fiche L2b |
 | `tauziet40/agentstack` | `/home/user/tauziet40/agentstack` | Plateforme serveur de BeeAI : agents en A2A, Keycloak, Helm ; fiche L2c |
-| `tauziet40/memorybear` | `/home/user/tauziet40/memorybear` | Envisagé pour la gestion des espaces ; impose Neo4j, Redis et Elasticsearch, hors contrainte de stack ; non évalué à ce stade |
+| `tauziet40/memorybear` | `/home/user/tauziet40/memorybear` | Post-traitement de Cognee (consolidation, oubli) et console d'administration des tenants « spaces » : modèles, skills, plugins, contextes autorisés par space ; fiche L2d. Impose Neo4j, Redis et Elasticsearch : écart de stack à instruire |
+| `tauziet40/synapse-ai` | `/home/user/tauziet40/synapse-ai` | Partie workflows et apps no-code pressentie pour extraction vers les mini-apps de Rowboat ; AGPL-3.0, provenance à établir ; note L2e |
 | `tauziet40/openrig` | `/home/user/tauziet40/openrig` | Coordination d'une équipe d'agents de pilotage de l'intégration ; livrable L5 |
 
 Centaur, Cognee et ElephantBroker ne sont lus que sur leurs surfaces d'interface. DSH est vérifié sur cinq seams (annexe B).
