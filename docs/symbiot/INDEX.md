@@ -1,9 +1,9 @@
 # Index — dossier Symbiot
 
-Le contenu final a été déplacé dans l'arborescence du dépôt `symbiot`, construite sous [`../../symbiot/`](../../symbiot/README.md) dans cette branche :
+Le dossier a été converti en bundle OKF et publié dans le dépôt privé [`Tauziet40/symbiot`](https://github.com/Tauziet40/symbiot) le 16 octobre 2026. Ce dépôt est la seule source à jour.
 
-- bundle de connaissance : [`symbiot/knowledge/`](../../symbiot/knowledge/index.md), journal [`log.md`](../../symbiot/knowledge/log.md)
-- versions de travail dépréciées : [`symbiot/deprecated/2026-10-15/`](../../symbiot/deprecated/2026-10-15/README.md)
-- stack et runbooks : [`symbiot/stack/`](../../symbiot/stack/README.md) ; rigs : [`symbiot/rigs/`](../../symbiot/rigs/README.md)
+La copie de construction sous [`../../symbiot/`](../../symbiot/README.md) dans cette branche est figée à la publication :
 
-Extraction vers le dépôt privé : voir [`symbiot/README.md`](../../symbiot/README.md).
+- bundle de connaissance : `knowledge/` (index, journal `log.md`)
+- versions de travail dépréciées : `deprecated/2026-10-15/`
+- stack et runbooks : `stack/` ; rigs : `rigs/`

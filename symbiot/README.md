@@ -11,9 +11,4 @@ Dépôt du projet Symbiot : la connaissance (bundle OKF), la stack V1 et les éq
 
 **Doctrine** (décisions D1 à D11 dans [`knowledge/decisions/`](knowledge/decisions/index.md)) : bases PostgreSQL et FalkorDB ; fichiers SeaweedFS ; exécution k3s ; identité Keycloak `sub` ; secrets OpenBao ; tout ce qui ne tient pas sur ces cinq-là est soit forké derrière une interface, soit inspirant.
 
-**Ce dépôt a été construit dans la branche de travail de `rowboat` sous `symbiot/`** parce que la session n'avait pas le droit de créer un dépôt. Extraction vers le dépôt privé `symbiot` :
-
-```sh
-git subtree split --prefix=symbiot -b symbiot-main
-git push git@github.com:tauziet40/symbiot.git symbiot-main:main
-```
+**Origine.** Dépôt privé [`Tauziet40/symbiot`](https://github.com/Tauziet40/symbiot), ouvert le 16 octobre 2026. L'arborescence a été construite dans la branche de travail `claude/gallant-heisenberg-6gsemz` de `rowboat` sous `symbiot/` et extraite par `git subtree split` : l'historique de chaque fichier remonte à cette branche. À partir de cette date, ce dépôt est la seule source ; la copie restée dans `rowboat` n'est plus mise à jour.
