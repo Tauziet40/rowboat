@@ -17,7 +17,6 @@ _Généré le 2026-10-16._
 
 ## Appel
 
-- [Carte des appels, à produire](/appels/a-produire.md)
 - [Cognee — Créer et posséder un dataset](/appels/cognee--creer-et-posseder-un-dataset.md)
 - [Cognee — Déclarer Cognee comme serveur MCP dans le client](/appels/cognee--declarer-cognee-comme-serveur-mcp-dans-le-client.md)
 - [Cognee — Découvrir les outils Cognee](/appels/cognee--decouvrir-les-outils-cognee.md)
@@ -34,6 +33,18 @@ _Généré le 2026-10-16._
 - [Cognee — Relire les résultats enrichis](/appels/cognee--relire-les-resultats-enrichis.md)
 - [Cognee — Suivre l'achèvement par polling](/appels/cognee--suivre-l-achevement-par-polling.md)
 - [Cognee — Suivre la progression détaillée en REST ou WebSocket](/appels/cognee--suivre-la-progression-detaillee-en-rest-ou-websocket.md)
+- [DSH — Annuler](/appels/dsh--annuler.md)
+- [DSH — Déclarer un serveur MCP (Cognee, OKF)](/appels/dsh--declarer-un-serveur-mcp-cognee-okf.md)
+- [DSH — Demande de permission vers le client](/appels/dsh--demande-de-permission-vers-le-client.md)
+- [DSH — Envoyer un prompt et recevoir les mises à jour](/appels/dsh--envoyer-un-prompt-et-recevoir-les-mises-a-jour.md)
+- [DSH — Intercepter un appel d'outil avant exécution](/appels/dsh--intercepter-un-appel-d-outil-avant-execution.md)
+- [DSH — Nommage et robustesse des outils MCP](/appels/dsh--nommage-et-robustesse-des-outils-mcp.md)
+- [DSH — Ouvrir une session et monter des serveurs MCP](/appels/dsh--ouvrir-une-session-et-monter-des-serveurs-mcp.md)
+- [DSH — Ouvrir une session, prompt, flux, arrêt](/appels/dsh--ouvrir-une-session-prompt-flux-arret.md)
+- [DSH — Poignée de main ACP](/appels/dsh--poignee-de-main-acp.md)
+- [DSH — Poignée de main SDK JSON-RPC](/appels/dsh--poignee-de-main-sdk-json-rpc.md)
+- [DSH — Reprendre, lister, configurer, fermer une session](/appels/dsh--reprendre-lister-configurer-fermer-une-session.md)
+- [DSH — Transports et authentification des serveurs MCP](/appels/dsh--transports-et-authentification-des-serveurs-mcp.md)
 - [Harbor — Accepter l'invitation](/appels/harbor--accepter-l-invitation.md)
 - [Harbor — Accuser l'invocation](/appels/harbor--accuser-l-invocation.md)
 - [Harbor — Accuser réception par une réaction](/appels/harbor--accuser-reception-par-une-reaction.md)

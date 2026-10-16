@@ -1,6 +1,5 @@
 # appels
 
-- [Carte des appels, à produire](a-produire.md) — Le répertoire appels/ est alimenté par le mouvement M2 bis. (draft)
 - [Cognee — Créer et posséder un dataset](cognee--creer-et-posseder-un-dataset.md) — A1 : POST /api/v1/datasets {name} ; GET /api/v1/datasets (draft)
 - [Cognee — Déclarer Cognee comme serveur MCP dans le client](cognee--declarer-cognee-comme-serveur-mcp-dans-le-client.md) — C0 : entrée `{type:"http", url, headers}` ou stdio `{command,args,env}` (draft)
 - [Cognee — Découvrir les outils Cognee](cognee--decouvrir-les-outils-cognee.md) — C1 : MCP `tools/list` (draft)
