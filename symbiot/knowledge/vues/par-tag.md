@@ -17,13 +17,21 @@ _Généré le 2026-10-16._
 
 ## a2a
 
+- [BeeAI Framework — Appeler un agent A2A distant](/appels/beeai-framework--appeler-un-agent-a2a-distant.md)
+- [BeeAI Framework — Exposer un agent en A2A](/appels/beeai-framework--exposer-un-agent-en-a2a.md)
+- [BeeAI Framework — Méthodes A2A servies](/appels/beeai-framework--methodes-a2a-servies.md)
 - [Agent Stack](/composants/agent-stack.md)
 - [BeeAI Framework](/composants/beeai-framework.md)
 - [D6 — Hébergement des agents](/decisions/D06-hebergement-des-agents.md)
 - [Évaluation Agent Stack](/evaluations/agentstack.md)
 - [Évaluation BeeAI Framework](/evaluations/beeai-framework.md)
+- [BeeAI Framework — serve A2A, MCP et Agent Stack, client MCP et A2A, interception](/interfaces/beeai-framework.md)
 - [Harbor — appels du client et frames initiées par le serveur](/interfaces/harbor.md)
 - [Interfaces côté client de la stack serveur](/interfaces/interfaces-serveur.md)
+
+## acp
+
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 
 ## connaissance
 
@@ -89,6 +97,8 @@ _Généré le 2026-10-16._
 - [DeepSeek Harness, vérification des cinq seams](/evaluations/dsh-seams.md)
 - [Évaluation Eigent](/evaluations/eigent.md)
 - [Évaluation MemoryBear](/evaluations/memorybear.md)
+- [BeeAI Framework — serve A2A, MCP et Agent Stack, client MCP et A2A, interception](/interfaces/beeai-framework.md)
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 - [Méthode de déploiement de la stack V1 et équipe d'agents](/methode/deploiement-v1.md)
 
 ## identité
@@ -129,6 +139,8 @@ _Généré le 2026-10-16._
 
 ## mcp
 
+- [BeeAI Framework — Consommer un serveur MCP (Cognee, OKF)](/appels/beeai-framework--consommer-un-serveur-mcp-cognee-okf.md)
+- [BeeAI Framework — Exposer outils, agents et prompts en MCP](/appels/beeai-framework--exposer-outils-agents-et-prompts-en-mcp.md)
 - [Cognee — Découvrir les outils Cognee](/appels/cognee--decouvrir-les-outils-cognee.md)
 - [Cognee — Envoyer un fichier Markdown pour enrichissement](/appels/cognee--envoyer-un-fichier-markdown-pour-enrichissement.md)
 - [Cognee — Exécuter un outil Cognee](/appels/cognee--executer-un-outil-cognee.md)
@@ -150,7 +162,9 @@ _Généré le 2026-10-16._
 - [MCP OKF et convertisseur Brain ↔ OKF](/composants/mcp-okf-convertisseur.md)
 - [Évaluation BeeAI Framework](/evaluations/beeai-framework.md)
 - [Évaluation Rowboat (client Symbiot)](/evaluations/rowboat.md)
+- [BeeAI Framework — serve A2A, MCP et Agent Stack, client MCP et A2A, interception](/interfaces/beeai-framework.md)
 - [Cognee — surfaces MCP et REST consommées par le client](/interfaces/cognee.md)
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 - [Harbor — appels du client et frames initiées par le serveur](/interfaces/harbor.md)
 - [Interfaces côté client de la stack serveur](/interfaces/interfaces-serveur.md)
 - [Une journée dans la vie, incrément 2](/scenarios/journee-increment-2.md)
@@ -230,6 +244,7 @@ _Généré le 2026-10-16._
 - [DeepSeek Harness](/composants/dsh.md)
 - [Architecture cible Symbiot (référentiel)](/conventions/architecture-cible.md)
 - [Évaluation Rowboat (client Symbiot)](/evaluations/rowboat.md)
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 - [Harbor — appels du client et frames initiées par le serveur](/interfaces/harbor.md)
 - [Méthode de déploiement de la stack V1 et équipe d'agents](/methode/deploiement-v1.md)
 - [Une journée dans la vie, incrément 2](/scenarios/journee-increment-2.md)
@@ -250,10 +265,23 @@ _Généré le 2026-10-16._
 
 ## sandbox
 
+- [BeeAI Framework — Appeler un agent A2A distant](/appels/beeai-framework--appeler-un-agent-a2a-distant.md)
+- [BeeAI Framework — Approbation et formulaire sous Agent Stack](/appels/beeai-framework--approbation-et-formulaire-sous-agent-stack.md)
+- [BeeAI Framework — Consommer un serveur MCP (Cognee, OKF)](/appels/beeai-framework--consommer-un-serveur-mcp-cognee-okf.md)
+- [BeeAI Framework — Exposer outils, agents et prompts en MCP](/appels/beeai-framework--exposer-outils-agents-et-prompts-en-mcp.md)
+- [BeeAI Framework — Exposer un agent en A2A](/appels/beeai-framework--exposer-un-agent-en-a2a.md)
+- [BeeAI Framework — Exposer un agent sur Agent Stack](/appels/beeai-framework--exposer-un-agent-sur-agent-stack.md)
+- [BeeAI Framework — Intercepter par middleware](/appels/beeai-framework--intercepter-par-middleware.md)
+- [BeeAI Framework — io_confirm sous A2A](/appels/beeai-framework--io-confirm-sous-a2a.md)
+- [BeeAI Framework — Méthodes A2A servies](/appels/beeai-framework--methodes-a2a-servies.md)
+- [BeeAI Framework — Permission d'outil](/appels/beeai-framework--permission-d-outil.md)
+- [BeeAI Framework — Produire l'Agent Card](/appels/beeai-framework--produire-l-agent-card.md)
 - [DSH — Annuler](/appels/dsh--annuler.md)
 - [DSH — Déclarer un serveur MCP (Cognee, OKF)](/appels/dsh--declarer-un-serveur-mcp-cognee-okf.md)
 - [DSH — Demande de permission vers le client](/appels/dsh--demande-de-permission-vers-le-client.md)
+- [DSH — Demander une approbation humaine](/appels/dsh--demander-une-approbation-humaine.md)
 - [DSH — Envoyer un prompt et recevoir les mises à jour](/appels/dsh--envoyer-un-prompt-et-recevoir-les-mises-a-jour.md)
+- [DSH — Garde monotone et post-exécution](/appels/dsh--garde-monotone-et-post-execution.md)
 - [DSH — Intercepter un appel d'outil avant exécution](/appels/dsh--intercepter-un-appel-d-outil-avant-execution.md)
 - [DSH — Nommage et robustesse des outils MCP](/appels/dsh--nommage-et-robustesse-des-outils-mcp.md)
 - [DSH — Ouvrir une session et monter des serveurs MCP](/appels/dsh--ouvrir-une-session-et-monter-des-serveurs-mcp.md)
@@ -261,21 +289,35 @@ _Généré le 2026-10-16._
 - [DSH — Poignée de main ACP](/appels/dsh--poignee-de-main-acp.md)
 - [DSH — Poignée de main SDK JSON-RPC](/appels/dsh--poignee-de-main-sdk-json-rpc.md)
 - [DSH — Reprendre, lister, configurer, fermer une session](/appels/dsh--reprendre-lister-configurer-fermer-une-session.md)
+- [DSH — Résoudre un secret](/appels/dsh--resoudre-un-secret.md)
 - [DSH — Transports et authentification des serveurs MCP](/appels/dsh--transports-et-authentification-des-serveurs-mcp.md)
 - [Centaur](/composants/centaur.md)
 - [DeepSeek Harness](/composants/dsh.md)
 - [D2 — Substrat d'exécution et de sandbox commun](/decisions/D02-substrat-d-execution-et-de-sandbox-commun.md)
 - [D6 — Hébergement des agents](/decisions/D06-hebergement-des-agents.md)
 - [DeepSeek Harness, vérification des cinq seams](/evaluations/dsh-seams.md)
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 
 ## secrets
 
 - [Centaur](/composants/centaur.md)
 - [OpenBao](/composants/openbao.md)
 - [D5 — Secrets](/decisions/D05-secrets.md)
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 
 ## serveur
 
+- [BeeAI Framework — Appeler un agent A2A distant](/appels/beeai-framework--appeler-un-agent-a2a-distant.md)
+- [BeeAI Framework — Approbation et formulaire sous Agent Stack](/appels/beeai-framework--approbation-et-formulaire-sous-agent-stack.md)
+- [BeeAI Framework — Consommer un serveur MCP (Cognee, OKF)](/appels/beeai-framework--consommer-un-serveur-mcp-cognee-okf.md)
+- [BeeAI Framework — Exposer outils, agents et prompts en MCP](/appels/beeai-framework--exposer-outils-agents-et-prompts-en-mcp.md)
+- [BeeAI Framework — Exposer un agent en A2A](/appels/beeai-framework--exposer-un-agent-en-a2a.md)
+- [BeeAI Framework — Exposer un agent sur Agent Stack](/appels/beeai-framework--exposer-un-agent-sur-agent-stack.md)
+- [BeeAI Framework — Intercepter par middleware](/appels/beeai-framework--intercepter-par-middleware.md)
+- [BeeAI Framework — io_confirm sous A2A](/appels/beeai-framework--io-confirm-sous-a2a.md)
+- [BeeAI Framework — Méthodes A2A servies](/appels/beeai-framework--methodes-a2a-servies.md)
+- [BeeAI Framework — Permission d'outil](/appels/beeai-framework--permission-d-outil.md)
+- [BeeAI Framework — Produire l'Agent Card](/appels/beeai-framework--produire-l-agent-card.md)
 - [Cognee — Créer et posséder un dataset](/appels/cognee--creer-et-posseder-un-dataset.md)
 - [Cognee — Déclarer Cognee comme serveur MCP dans le client](/appels/cognee--declarer-cognee-comme-serveur-mcp-dans-le-client.md)
 - [Cognee — Découvrir les outils Cognee](/appels/cognee--decouvrir-les-outils-cognee.md)
@@ -295,7 +337,9 @@ _Généré le 2026-10-16._
 - [DSH — Annuler](/appels/dsh--annuler.md)
 - [DSH — Déclarer un serveur MCP (Cognee, OKF)](/appels/dsh--declarer-un-serveur-mcp-cognee-okf.md)
 - [DSH — Demande de permission vers le client](/appels/dsh--demande-de-permission-vers-le-client.md)
+- [DSH — Demander une approbation humaine](/appels/dsh--demander-une-approbation-humaine.md)
 - [DSH — Envoyer un prompt et recevoir les mises à jour](/appels/dsh--envoyer-un-prompt-et-recevoir-les-mises-a-jour.md)
+- [DSH — Garde monotone et post-exécution](/appels/dsh--garde-monotone-et-post-execution.md)
 - [DSH — Intercepter un appel d'outil avant exécution](/appels/dsh--intercepter-un-appel-d-outil-avant-execution.md)
 - [DSH — Nommage et robustesse des outils MCP](/appels/dsh--nommage-et-robustesse-des-outils-mcp.md)
 - [DSH — Ouvrir une session et monter des serveurs MCP](/appels/dsh--ouvrir-une-session-et-monter-des-serveurs-mcp.md)
@@ -303,6 +347,7 @@ _Généré le 2026-10-16._
 - [DSH — Poignée de main ACP](/appels/dsh--poignee-de-main-acp.md)
 - [DSH — Poignée de main SDK JSON-RPC](/appels/dsh--poignee-de-main-sdk-json-rpc.md)
 - [DSH — Reprendre, lister, configurer, fermer une session](/appels/dsh--reprendre-lister-configurer-fermer-une-session.md)
+- [DSH — Résoudre un secret](/appels/dsh--resoudre-un-secret.md)
 - [DSH — Transports et authentification des serveurs MCP](/appels/dsh--transports-et-authentification-des-serveurs-mcp.md)
 - [Harbor — Accepter l'invitation](/appels/harbor--accepter-l-invitation.md)
 - [Harbor — Accuser l'invocation](/appels/harbor--accuser-l-invocation.md)
@@ -343,7 +388,9 @@ _Généré le 2026-10-16._
 - [SeaweedFS](/composants/seaweedfs.md)
 - [Architecture cible Symbiot (référentiel)](/conventions/architecture-cible.md)
 - [D11 — Flux d'événements et versions](/decisions/D11-flux-d-evenements-et-versions.md)
+- [BeeAI Framework — serve A2A, MCP et Agent Stack, client MCP et A2A, interception](/interfaces/beeai-framework.md)
 - [Cognee — surfaces MCP et REST consommées par le client](/interfaces/cognee.md)
+- [DSH — ACP, SDK JSON-RPC, client MCP, politique, credentials](/interfaces/dsh.md)
 - [Harbor — appels du client et frames initiées par le serveur](/interfaces/harbor.md)
 - [Interfaces côté client de la stack serveur](/interfaces/interfaces-serveur.md)
 - [Machine d'évaluation et installations existantes](/inventaire/machine-evaluation.md)
