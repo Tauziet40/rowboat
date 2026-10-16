@@ -1,32 +1,25 @@
 ---
 type: Vue
-title: Vue par statut
+title: Vue par type
 description: Index généré par symbiot knowledge views ; ne pas éditer à la main.
 tags:
   - okf
 generated:
   by: process:knowledge-views
-  at: 2026-10-16T18:00:00+02:00
+  at: 2026-10-16T00:00:00+00:00
 status: stable
 ---
 
-# Vue par statut
+# Vue par type
 
-_Généré le 2026-10-16 ; ne pas éditer à la main._
+_Généré le 2026-10-16._
 
 
-## deprecated
-
-- [Plan d'évaluation validé (v3.6)](/references/plan-evaluation.md)
-- [Plan court de L5, validé le 16 octobre](/references/plan-methode-deploiement-v1.md)
-
-## draft
+## Appel
 
 - [Carte des appels, à produire](/appels/a-produire.md)
-- [Alignement des types OKF et de l'ontologie Cognee](/conventions/okf-ontologie.md)
-- [Machine d'évaluation et installations existantes](/inventaire/machine-evaluation.md)
 
-## stable
+## Chantier
 
 - [Chantier 00 — Neutraliser les défauts cloud du client](/chantiers/00-neutraliser-les-defauts-cloud-du-client.md)
 - [Chantier 01 — Keycloak](/chantiers/01-keycloak.md)
@@ -51,6 +44,9 @@ _Généré le 2026-10-16 ; ne pas éditer à la main._
 - [Chantier 19 — Console des spaces et API de politique](/chantiers/19-console-des-spaces-et-api-de-politique.md)
 - [Chantier 20 — Post-traitement de Cognee](/chantiers/20-post-traitement-de-cognee.md)
 - [Chantier 21 — Workflows no-code](/chantiers/21-workflows-no-code.md)
+
+## Composant
+
 - [Agent Stack](/composants/agent-stack.md)
 - [API de politique et console des spaces](/composants/api-politique-console.md)
 - [BeeAI Framework](/composants/beeai-framework.md)
@@ -66,11 +62,18 @@ _Généré le 2026-10-16 ; ne pas éditer à la main._
 - [PostgreSQL](/composants/postgresql.md)
 - [Proxy LLM (celui d'Agent Stack)](/composants/proxy-llm.md)
 - [SeaweedFS](/composants/seaweedfs.md)
+
+## Convention
+
 - [Architecture cible Symbiot (référentiel)](/conventions/architecture-cible.md)
 - [Échelle de dérivation et extraction par tranche](/conventions/derivation.md)
+- [Alignement des types OKF et de l'ontologie Cognee](/conventions/okf-ontologie.md)
 - [Convention PostgreSQL](/conventions/postgresql.md)
 - [Taxonomie des types et des tags](/conventions/taxonomie.md)
 - [Quintuplet de tenance](/conventions/tenance.md)
+
+## Décision
+
 - [D1 — Bases de données](/decisions/D01-bases-de-donnees.md)
 - [D2 — Substrat d'exécution et de sandbox commun](/decisions/D02-substrat-d-execution-et-de-sandbox-commun.md)
 - [D3 — Tenance](/decisions/D03-tenance.md)
@@ -82,6 +85,35 @@ _Généré le 2026-10-16 ; ne pas éditer à la main._
 - [D9 — Modèles](/decisions/D09-modeles.md)
 - [D10 — Core et inspirants](/decisions/D10-core-et-inspirants.md)
 - [D11 — Flux d'événements et versions](/decisions/D11-flux-d-evenements-et-versions.md)
+
+## Interface
+
+- [Interfaces côté client de la stack serveur](/interfaces/interfaces-serveur.md)
+
+## Inventaire
+
+- [Machine d'évaluation et installations existantes](/inventaire/machine-evaluation.md)
+
+## Méthode
+
+- [Méthode de déploiement de la stack V1 et équipe d'agents](/methode/deploiement-v1.md)
+
+## Provenance
+
+- [Gabarit de concept Provenance](/provenance/gabarit.md)
+
+## Référence
+
+- [Plan d'évaluation validé (v3.6)](/references/plan-evaluation.md)
+- [Plan court de L5, validé le 16 octobre](/references/plan-methode-deploiement-v1.md)
+- [Spécification OKF v0.2](/references/spec-okf.md)
+
+## Scénario
+
+- [Une journée dans la vie, incrément 2](/scenarios/journee-increment-2.md)
+
+## Évaluation
+
 - [Évaluation Agent Stack](/evaluations/agentstack.md)
 - [Évaluation BeeAI Framework](/evaluations/beeai-framework.md)
 - [Comparatif et recommandation](/evaluations/comparatif.md)
@@ -90,8 +122,3 @@ _Généré le 2026-10-16 ; ne pas éditer à la main._
 - [Évaluation MemoryBear](/evaluations/memorybear.md)
 - [Évaluation Rowboat (client Symbiot)](/evaluations/rowboat.md)
 - [Évaluation Synapse AI, workflows et apps](/evaluations/synapse-ai.md)
-- [Interfaces côté client de la stack serveur](/interfaces/interfaces-serveur.md)
-- [Méthode de déploiement de la stack V1 et équipe d'agents](/methode/deploiement-v1.md)
-- [Gabarit de concept Provenance](/provenance/gabarit.md)
-- [Spécification OKF v0.2](/references/spec-okf.md)
-- [Une journée dans la vie, incrément 2](/scenarios/journee-increment-2.md)

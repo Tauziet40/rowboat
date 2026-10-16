@@ -6,13 +6,13 @@ tags:
   - okf
 generated:
   by: process:knowledge-views
-  at: 2026-10-16T18:00:00+02:00
+  at: 2026-10-16T00:00:00+00:00
 status: stable
 ---
 
 # Vue par tag
 
-_Généré le 2026-10-16 ; ne pas éditer à la main._
+_Généré le 2026-10-16._
 
 
 ## a2a

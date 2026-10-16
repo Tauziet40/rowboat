@@ -1,0 +1,53 @@
+# rigs/increment-0/rig.yaml — à valider contre la spec de rig d'OpenRig (docs/reference/rig-spec.md)
+name: symbiot-increment-0
+description: Identité et tenance : Keycloak, rôles et schémas PostgreSQL, graphes FalkorDB, buckets, namespaces.
+context:
+  bundle: knowledge/            # chargé par le MCP OKF ; recall Cognee sur le dataset symbiot-stack
+  read_first:
+    - knowledge/decisions/D3-tenance.md
+    - knowledge/decisions/D4-identite.md
+    - knowledge/conventions/tenance.md
+    - knowledge/inventaire/machine-evaluation.md
+seats:
+  - name: operateur
+    harness: claude-code
+    prompt: rigs/shared/roles/operateur.md
+    permissions: read-only
+  - name: cartographe
+    harness: claude-code
+    prompt: rigs/shared/roles/cartographe.md
+    permissions: workspace-write
+    scope: [knowledge/]
+  - name: integrateur-identite
+    harness: codex
+    prompt: rigs/increment-0/prompts/integrateur-identite.md   # Keycloak realm, clients, mappers
+    permissions: workspace-write
+    scope: [stack/charts/keycloak, stack/cluster]
+  - name: integrateur-tenance
+    harness: codex
+    prompt: rigs/increment-0/prompts/integrateur-tenance.md    # rôles, schémas, graphes, buckets, namespaces
+    permissions: workspace-write
+    scope: [stack/charts, stack/runbooks, stack/env]
+  - name: verificateur
+    harness: claude-code
+    prompt: rigs/shared/roles/verificateur.md
+    permissions: read-only
+    allowed_commands: ["symbiot test *", "symbiot verify *"]
+  - name: gardien
+    harness: claude-code
+    prompt: rigs/shared/roles/gardien.md
+    permissions: read-only
+    triggers: [pull_request]
+  - name: scribe
+    harness: claude-code
+    prompt: rigs/shared/roles/scribe.md
+    permissions: workspace-write
+    scope: [knowledge/log.md, knowledge/vues/]
+rules:
+  - no seat may run commands on the server except through `symbiot <runbook>`
+  - integrateur and verificateur are never the same seat
+  - every PR carries a provenance concept or a `no-provenance-change` label validated by gardien
+definition_of_done:
+  - scenario: knowledge/scenarios/journee-increment-0.md passes via `symbiot verify increment-0`
+  - demo recorded on the evaluation machine
+  - all concepts touched are `verified: human:vs` within the week
