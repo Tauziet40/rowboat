@@ -14,7 +14,7 @@ stale_after: 2027-01-16T00:00:00+02:00
 
 # Taxonomie des types et des tags
 
-**Types** (un répertoire par type) : Composant, Interface, Appel, Décision, Chantier, Convention, Scénario, Provenance, Inventaire, Évaluation, Méthode, Référence, Vue (générée, non éditée).
+**Types** (un répertoire par type) : Composant, Interface, Appel, Décision, Chantier, Convention, Scénario, Provenance, Inventaire, Évaluation, Méthode, Référence (archive d'un plan validé, stable, jamais dépréciée), Vue (générée, non éditée).
 
 **Tags** (vocabulaire fermé, extension par PR sur ce fichier) : poste, serveur, connaissance, identité, secrets, mémoire, rag, okf, mcp, a2a, acp, sandbox, k3s, routage, stockage, tenance, gouvernance, workflows, inspirant, core.
 

@@ -9,7 +9,7 @@ sources:
 generated:
   by: claude-fable-5.1/session-01MK6
   at: 2026-10-16T18:00:00+02:00
-status: deprecated
+status: stable
 stale_after: 2027-01-16T00:00:00+02:00
 ---
 

@@ -15,11 +15,6 @@ status: stable
 _Généré le 2026-10-16._
 
 
-## deprecated
-
-- [Plan d'évaluation validé (v3.6)](/references/plan-evaluation.md)
-- [Plan court de L5, validé le 16 octobre](/references/plan-methode-deploiement-v1.md)
-
 ## draft
 
 - [Carte des appels, à produire](/appels/a-produire.md)
@@ -93,5 +88,7 @@ _Généré le 2026-10-16._
 - [Interfaces côté client de la stack serveur](/interfaces/interfaces-serveur.md)
 - [Méthode de déploiement de la stack V1 et équipe d'agents](/methode/deploiement-v1.md)
 - [Gabarit de concept Provenance](/provenance/gabarit.md)
+- [Plan d'évaluation validé (v3.6)](/references/plan-evaluation.md)
+- [Plan court de L5, validé le 16 octobre](/references/plan-methode-deploiement-v1.md)
 - [Spécification OKF v0.2](/references/spec-okf.md)
 - [Une journée dans la vie, incrément 2](/scenarios/journee-increment-2.md)
