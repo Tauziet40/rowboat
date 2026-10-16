@@ -1,0 +1,17 @@
+# composants
+
+- [Agent Stack](agent-stack.md) — registre et hébergement des agents de service en A2A, proxy LLM autorité de routage et de quota (D9), connecteurs MCP OAuth par utilisateur (stable)
+- [API de politique et console des spaces](api-politique-console.md) — gouvernance unique (D7), C15 : capacités par space, UX reprise de MemoryBear, back-office neuf (stable)
+- [BeeAI Framework](beeai-framework.md) — bibliothèque pour écrire les agents de service : outils, MCP client, serve A2A et MCP, RequirementAgent (stable)
+- [Centaur](centaur.md) — sessions d'agents en sandbox par fil, workflows durables, courtier de credentials (D6) (stable)
+- [Client Symbiot (fork de Rowboat)](client-symbiot.md) — poste : second cerveau, productions, assistant local, projection vers les Spaces (stable)
+- [Cognee](cognee.md) — point d'unification RAG et mémoire, ontologie maintenue, middleware de peuplement de FalkorDB (D1) (stable)
+- [DeepSeek Harness](dsh.md) — harness d'exécution des agents : journal rejouable, profils et bundles, sandbox OS, ACP (stable)
+- [FalkorDB](falkordb.md) — vecteurs et graphe, graphes nommés par application ou dataset, peuplés via Cognee (D1) (stable)
+- [Harbor](harbor.md) — orgs, spaces, membres humains et agents, journal append-only canonique (D11), blobs (stable)
+- [Keycloak](keycloak.md) — identité unique, sub partout (D4) (stable)
+- [MCP OKF et convertisseur Brain ↔ OKF](mcp-okf-convertisseur.md) — accès outil à la connaissance curatée ; aller-retour second cerveau ↔ serveur (stable)
+- [OpenBao](openbao.md) — source unique des secrets (D5) (stable)
+- [PostgreSQL](postgresql.md) — relationnel, un rôle et un schéma par application (D3) (stable)
+- [Proxy LLM (celui d'Agent Stack)](proxy-llm.md) — autorité de routage et de quota (D9), GPU publié au cluster (stable)
+- [SeaweedFS](seaweedfs.md) — fichiers et blobs, API S3 (stable)
